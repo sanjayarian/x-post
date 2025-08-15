@@ -11,7 +11,7 @@ def scrape_google_news_sports():
     """Mengambil satu berita olahraga teratas dari Google News RSS Feed untuk Amerika Serikat."""
     # URL RSS Feed untuk Google News seksi olahraga di Amerika Serikat
     rss_url = "https://news.google.com/rss/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRFp1ZEdvU0FtVnpHZ0pKVGlnQVAB?hl=en-US&gl=US&ceid=US:en"
-    try
+    try:
         # Parsing RSS feed
         news_feed = feedparser.parse(rss_url)
 
@@ -48,7 +48,7 @@ def generate_post_with_gemini(trend):
         f"Do NOT add any links or hashtags in your response. Just provide the main text."
     )
 
-    try
+    try:
         response = model.generate_content(prompt)
         # print("Konten berhasil dibuat oleh Gemini.")
         return response.text.strip()
@@ -59,7 +59,7 @@ def generate_post_with_gemini(trend):
 # --- FUNGSI UNTUK MENDAPATKAN LINK ---
 def get_random_link(filename="links.txt"):
     """Membaca file dan memilih satu link secara acak."""
-    try
+    try:
         with open(filename, 'r') as f:
             links = [line.strip() for line in f if line.strip()]
         return random.choice(links) if links else None
@@ -70,7 +70,7 @@ def get_random_link(filename="links.txt"):
 # --- FUNGSI UNTUK POSTING KE X.COM ---
 def post_to_x(text_to_post, image_url=None):
     """Memposting teks dan gambar (opsional) ke X.com."""
-    try
+    try:
         media_ids = []
         if image_url:
             auth = tweepy.OAuth1UserHandler(
